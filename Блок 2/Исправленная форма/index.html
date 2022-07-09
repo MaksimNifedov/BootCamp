@@ -1,0 +1,41 @@
+
+   <!DOCTYPE html>
+   <html lang="ru">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Запись на курсы программирования </title>
+   </head>
+   <h1>Запись на курсы программирования </h1>
+   <hr>
+   <form action="request.php" method="post">
+      <small>Имя:</small><br>
+      <input type="text" placeholder="Андрей" name='name' required><br><br>
+      <label><input type="radio" name="programmingLanguage" value="Java" checked> Java</label>
+      <label><input type="radio" name="programmingLanguage" value="C++"> C++</label>
+      <label><input type="radio" name="programmingLanguage" value="Python"> Python</label>
+      <label><input type="radio" name="programmingLanguage" value="PHP"> PHP</label>
+      <label><input type="radio" name="programmingLanguage" value="JavaScript"> JavaScript</label><br><br>
+
+      <small>Дополнительная информация:</small><br>
+      <textarea placeholder="Есть опыт программирования на Java" required name="description" cols="23"
+         rows="4"></textarea>
+      <br><br>
+
+      <small>Секретное слово:</small><br>
+      <input type="password" name='secret' required><br><br>
+
+      <input id="check" name="check" type="checkbox" required><label for="check">С правилами ознакомился и
+         согласен</label> <br> <br>
+
+      <input type="submit">
+      <input type="reset" value="Очистить">
+
+   </form>
+   <hr>
+   Made by andron13
+   </body>
+
+   </html>
