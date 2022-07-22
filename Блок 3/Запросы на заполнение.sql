@@ -1,4 +1,3 @@
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -81,7 +80,7 @@ CREATE TABLE `product` (
   `Price_With_Promocode` decimal(10,2) NOT NULL,
   `Description` varchar(350) NOT NULL,
   `Product_activity` tinyint(1) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `product`
@@ -180,25 +179,41 @@ CREATE TABLE `section_product` (
 --
 
 INSERT INTO `section_product` (`Product_ID_Product`, `Section_ID_Section`) VALUES
+(1, 1),
 (1, 2),
 (1, 3),
 (3, 1),
+(3, 2),
 (3, 3),
+(4, 1),
 (4, 2),
 (4, 3),
+(5, 2),
 (5, 3),
+(6, 2),
 (6, 3),
+(7, 2),
 (7, 3),
+(8, 2),
 (8, 3),
+(9, 2),
 (9, 3),
+(10, 2),
 (10, 3),
+(11, 2),
 (11, 3),
+(12, 2),
 (12, 3),
 (13, 1),
+(13, 2),
 (13, 3),
+(14, 2),
 (14, 3),
+(15, 2),
 (15, 3),
+(16, 2),
 (16, 3),
+(17, 4),
 (17, 5);
 
 --
@@ -256,7 +271,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID_Product` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Product` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `section`
