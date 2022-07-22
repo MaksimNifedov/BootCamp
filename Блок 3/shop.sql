@@ -20,14 +20,25 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `shop`.`Изображения`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `shop`.`Изображения` (
+  `ID Изображения` INT NOT NULL AUTO_INCREMENT,
+  `ALT` VARCHAR(150) NOT NULL,
+  `Адрес изображения` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`ID Изображения`),
+  UNIQUE INDEX `Адрес изображения_UNIQUE` (`Адрес изображения` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `shop`.`Товар`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shop`.`Товар` (
   `ID товара` INT NOT NULL AUTO_INCREMENT,
   `Название` VARCHAR(60) NOT NULL,
   `ID главного раздела` INT NOT NULL,
-  `Главное изображение_ссылка` VARCHAR(255) NOT NULL,
-  `Изображение для анонса_ссылка` VARCHAR(255) NOT NULL,
+  `ID главного  изображения` INT NOT NULL,
   `Цена` DECIMAL(10,2) NOT NULL,
   `Цена без скидки` DECIMAL(10,2) NOT NULL,
   `Цена по промокоду` DECIMAL(10,2) NOT NULL,
@@ -35,9 +46,15 @@ CREATE TABLE IF NOT EXISTS `shop`.`Товар` (
   `Активность товара` TINYINT(1) NOT NULL,
   PRIMARY KEY (`ID товара`),
   INDEX `Товар_Раздел` (`ID главного раздела` ASC) VISIBLE,
+  INDEX `Товар_Главное_Изображение` (`ID главного  изображения` ASC) INVISIBLE,
   CONSTRAINT `Товар_раздел`
     FOREIGN KEY (`ID главного раздела`)
     REFERENCES `shop`.`Раздел` (`ID Раздела`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `Товар_Главное_Изображение`
+    FOREIGN KEY (`ID главного  изображения`)
+    REFERENCES `shop`.`Изображения` (`ID Изображения`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -66,18 +83,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `shop`.`Дополнительные изображения`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `shop`.`Дополнительные изображения` (
-  `ID Изображения` INT NOT NULL AUTO_INCREMENT,
-  `ALT` VARCHAR(150) NOT NULL,
-  `Адрес изображения` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`ID Изображения`),
-  UNIQUE INDEX `Адрес изображения_UNIQUE` (`Адрес изображения` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `shop`.`Товар_изображение`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shop`.`Товар_изображение` (
@@ -88,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `shop`.`Товар_изображение` (
   INDEX `Изображение_товара` (`ID_Изображения товара` ASC) VISIBLE,
   CONSTRAINT `Изображение_ID`
     FOREIGN KEY (`ID_Изображения товара`)
-    REFERENCES `shop`.`Дополнительные изображения` (`ID Изображения`)
+    REFERENCES `shop`.`Изображения` (`ID Изображения`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `Товар_ID`
