@@ -1,13 +1,15 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-use `shop`;
+--
+-- База данных: `shop`
+--
+USE `shop`;
 --
 -- Дамп данных таблицы `images`
 --
 
-INSERT INTO `images` (`ID_Image`, `ALT`, `Link_Image`) VALUES
+INSERT INTO `images` (`id_image`, `alt`, `link_image`) VALUES
 (1, 'Белые спортивные брюки. Вид спереди.', 'https://a.lmcdn.ru/product/R/T/RTLABJ347301_16872462_1_v1_2x.jpg'),
 (2, 'Белые спортивные брюки. На мужчине с синим свитшотом. ', 'https://a.lmcdn.ru/product/R/T/RTLABJ347301_16872463_2_v1_2x.jpg'),
 (3, 'Белые спортивные брюки. Вид сзади.', 'https://a.lmcdn.ru/product/R/T/RTLABJ347301_16872464_3_v1_2x.jpg'),
@@ -47,18 +49,19 @@ INSERT INTO `images` (`ID_Image`, `ALT`, `Link_Image`) VALUES
 -- Дамп данных таблицы `section`
 --
 
-INSERT INTO `section` (`ID_Section`, `Name`, `Description`) VALUES
+INSERT INTO `section` (`id_section`, `name`, `description`) VALUES
 (1, 'Брюки', 'Все виды брюк от спортивных до элегантных.'),
 (2, 'Джинсы', 'Джинсы от обычных голубых до разноцветных рваных'),
 (3, 'Мужская одежда', 'Одежда от верха до низа.'),
 (4, 'Кроссовки', 'Кроссовки на все сезоны.'),
 (5, 'Обувь', 'От кроссовок до пары элегантных туфель. ');
 
+
 --
 -- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`ID_Product`, `Name`, `ID_Main_Section`, `ID_Main_Image`, `Price`, `Price_Without_Sale`, `Price_With_Promocode`, `Description`, `Product_activity`) VALUES
+INSERT INTO `product` (`id_product`, `name`, `id_main_section`, `id_main_image`, `price`, `price_without_sale`, `price_with_promocode`, `description`, `product_activity`) VALUES
 (1, 'Брюки спортивные M FV PT Adidas', 1, 1, '3290.00', '5999.00', '3000.00', 'В составе 100% хлопок. Мультисезонные. Вид стиля: спортивный. Цвет: Белый.', 1),
 (3, 'Massimo Dutti  чёрные брюки', 2, 4, '5990.00', '9520.00', '5145.00', 'Состав: Полиэстер - 54%, Шерсть - 44%, Эластан - 2%. Посадка: Slim fit. Карманы: 4. Вид застёжки: молния.', 1),
 (4, 'Брюки от O\'Stin', 1, 6, '2999.00', '5000.00', '2450.00', 'Состав: Полиэстер - 69%, Вискоза - 31%. Цвет: Синий. Узор: клетка. Страна производства: Китай.', 1),
@@ -80,7 +83,7 @@ INSERT INTO `product` (`ID_Product`, `Name`, `ID_Main_Section`, `ID_Main_Image`,
 -- Дамп данных таблицы `product_image`
 --
 
-INSERT INTO `product_image` (`ID_Prodict`, `ID_Image`) VALUES
+INSERT INTO `product_image` (`id_prodict`, `id_image`) VALUES
 (1, 2),
 (1, 3),
 (1, 8),
@@ -107,7 +110,7 @@ INSERT INTO `product_image` (`ID_Prodict`, `ID_Image`) VALUES
 -- Дамп данных таблицы `section_product`
 --
 
-INSERT INTO `section_product` (`Product_ID_Product`, `Section_ID_Section`) VALUES
+INSERT INTO `section_product` (`product_id_product`, `section_id_section`) VALUES
 (1, 1),
 (1, 2),
 (1, 3),
