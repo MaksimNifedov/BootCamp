@@ -2,28 +2,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `shop`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `images`
---
-
-CREATE TABLE `images` (
-  `ID_Image` int NOT NULL,
-  `ALT` varchar(150) NOT NULL,
-  `Link_Image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
+use `shop`;
 --
 -- Дамп данных таблицы `images`
 --
@@ -64,24 +43,6 @@ INSERT INTO `images` (`ID_Image`, `ALT`, `Link_Image`) VALUES
 (33, 'Кроссовки Reebok Classics. Вид сбоку.', 'https://a.lmcdn.ru/product/R/T/RTLABK224501_17026327_3_v1.jpg'),
 (34, 'Кроссовки Reebok Classics. Вид сверху.', 'https://a.lmcdn.ru/product/R/T/RTLABK224501_17026326_2_v1.jpg');
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `product`
---
-
-CREATE TABLE `product` (
-  `ID_Product` int NOT NULL,
-  `Name` varchar(60) NOT NULL,
-  `ID_Main_Section` int NOT NULL,
-  `ID_Main_Image` int NOT NULL,
-  `Price` decimal(10,2) NOT NULL,
-  `Price_Without_Sale` decimal(10,2) NOT NULL,
-  `Price_With_Promocode` decimal(10,2) NOT NULL,
-  `Description` varchar(350) NOT NULL,
-  `Product_activity` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 --
 -- Дамп данных таблицы `product`
 --
@@ -103,17 +64,6 @@ INSERT INTO `product` (`ID_Product`, `Name`, `ID_Main_Section`, `ID_Main_Image`,
 (15, 'Джинсы Trendyol', 2, 29, '2470.00', '4990.00', '2250.00', 'Состав:Хлопок - 98%, Эластан - 2%. Страна: Турция.', 1),
 (16, 'Джинсы Befree', 2, 31, '3999.00', '4800.00', '3500.00', 'Состав:Хлопок - 85%, Полиэстер - 13%, Вискоза - 2%. Страна: Китай.', 1),
 (17, 'Кроссовки Reebok Classics', 4, 33, '10999.00', '12999.00', '10000.00', 'Кроссовки выполнены из натуральной кожи и композиционной кожи. Детали: верх из натуральной кожи, амортизация без утяжеления, стандартная шнуровка, текстильная подкладка.', 0);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `product_image`
---
-
-CREATE TABLE `product_image` (
-  `ID_Prodict` int NOT NULL,
-  `ID_Image` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Дамп данных таблицы `product_image`
@@ -140,18 +90,6 @@ INSERT INTO `product_image` (`ID_Prodict`, `ID_Image`) VALUES
 (16, 32),
 (17, 34);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `section`
---
-
-CREATE TABLE `section` (
-  `ID_Section` int NOT NULL,
-  `Name` varchar(80) NOT NULL,
-  `Description` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
 --
 -- Дамп данных таблицы `section`
 --
@@ -162,17 +100,6 @@ INSERT INTO `section` (`ID_Section`, `Name`, `Description`) VALUES
 (3, 'Мужская одежда', 'Одежда от верха до низа.'),
 (4, 'Кроссовки', 'Кроссовки на все сезоны.'),
 (5, 'Обувь', 'От кроссовок до пары элегантных туфель. ');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `section_product`
---
-
-CREATE TABLE `section_product` (
-  `Product_ID_Product` int NOT NULL,
-  `Section_ID_Section` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Дамп данных таблицы `section_product`
@@ -215,89 +142,4 @@ INSERT INTO `section_product` (`Product_ID_Product`, `Section_ID_Section`) VALUE
 (16, 3),
 (17, 4),
 (17, 5);
-
---
--- Индексы сохранённых таблиц
---
-
---
--- Индексы таблицы `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`ID_Image`),
-  ADD UNIQUE KEY `Link_Image` (`Link_Image`);
-
---
--- Индексы таблицы `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`ID_Product`),
-  ADD KEY `Prodict_Main_Section` (`ID_Main_Section`),
-  ADD KEY `Product_Main_Image` (`ID_Main_Image`);
-
---
--- Индексы таблицы `product_image`
---
-ALTER TABLE `product_image`
-  ADD PRIMARY KEY (`ID_Prodict`,`ID_Image`),
-  ADD KEY `ID_Product_for_Image` (`ID_Prodict`),
-  ADD KEY `Image_Product` (`ID_Image`);
-
---
--- Индексы таблицы `section`
---
-ALTER TABLE `section`
-  ADD PRIMARY KEY (`ID_Section`);
-
---
--- Индексы таблицы `section_product`
---
-ALTER TABLE `section_product`
-  ADD PRIMARY KEY (`Product_ID_Product`,`Section_ID_Section`),
-  ADD KEY `Section_Product_ID_Product` (`Product_ID_Product`),
-  ADD KEY `Section_Product_ID_Section` (`Section_ID_Section`);
-
---
--- AUTO_INCREMENT для сохранённых таблиц
---
-
---
--- AUTO_INCREMENT для таблицы `images`
---
-ALTER TABLE `images`
-  MODIFY `ID_Image` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT для таблицы `product`
---
-ALTER TABLE `product`
-  MODIFY `ID_Product` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT для таблицы `section`
---
-ALTER TABLE `section`
-  MODIFY `ID_Section` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Ограничения внешнего ключа сохраненных таблиц
---
-
---
--- Ограничения внешнего ключа таблицы `product_image`
---
-ALTER TABLE `product_image`
-  ADD CONSTRAINT `ID_Image` FOREIGN KEY (`ID_Image`) REFERENCES `images` (`ID_Image`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ID_Product` FOREIGN KEY (`ID_Prodict`) REFERENCES `product` (`ID_Product`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Ограничения внешнего ключа таблицы `section_product`
---
-ALTER TABLE `section_product`
-  ADD CONSTRAINT `Product_ID_Product` FOREIGN KEY (`Product_ID_Product`) REFERENCES `product` (`ID_Product`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Section_ID_Section` FOREIGN KEY (`Section_ID_Section`) REFERENCES `section` (`ID_Section`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
